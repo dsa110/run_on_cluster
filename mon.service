@@ -1,0 +1,18 @@
+[Unit]
+Description=Mon Service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/proj/dsa110-shell/dsa110-xengine/scripts
+ExecStart=/home/ubuntu/anaconda3/envs/casa38/bin/python /home/ubuntu/proj/dsa110-shell/dsa110-xengine/scripts/mon.py -in pipeline -cn NUMBER
+StandardOutput=syslog
+StandardError=syslog
+
+# Prevent python buffering; write to syslog
+Environment=PYTHONUNBUFFERED=1
+
+# Restart service on failure
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

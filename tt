@@ -1,0 +1,12 @@
+[Unit]
+Description=Cleanup Service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/data
+ExecStart=/bin/bash /home/ubuntu/data/copy.bash h22
+Restart=on-failure
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

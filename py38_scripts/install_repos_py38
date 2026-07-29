@@ -1,0 +1,46 @@
+#!/bin/bash
+
+CONDA='conda'
+WEB_MAAS="http://10.42.0.3/maas"
+REPODIR='/home/ubuntu/proj/dsa110-shell'
+
+echo "install_repos_py38"
+
+# activate env
+eval "$(conda shell.bash hook)"
+$CONDA activate casa38
+
+# Download and install casa6
+
+$CONDA env list
+
+pip install --upgrade --extra-index-url https://go.nrao.edu/pypi casadata
+
+# ipython
+pip install ipython
+
+# dsa110-pyutils
+cd $REPODIR/dsa110-pyutils
+python setup.py install
+
+# dsa110-antpos
+cd $REPODIR/dsa110-antpos
+python setup.py install
+
+# install psrdada-python
+cd $REPODIR/psrdada-python
+make && make install
+
+# dsa110-calib
+cd $REPODIR/dsa110-calib
+python setup.py install
+
+# dsa110-meridian-fs
+cd $REPODIR/dsa110-meridian-fs
+python setup.py install
+
+# install labjac module
+pip install labjack-ljm
+
+chown -R ubuntu:ubuntu /home/ubuntu
+
